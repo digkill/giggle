@@ -14,6 +14,7 @@ services:
       POSTGRES_USER: giggle
       POSTGRES_PASSWORD: "123456"
       NATS_ADDRESS: nats:4222
+
   query:
     build: .
     command: query-service
@@ -28,6 +29,7 @@ services:
       POSTGRES_PASSWORD: "123456"
       NATS_ADDRESS: nats:4222
       ELASTICSEARCH_ADDRESS: elasticsearch:9200
+
   pusher:
     build: .
     command: pusher-service
@@ -37,24 +39,28 @@ services:
       - 8080
     environment:
       NATS_ADDRESS: nats:4222
+
   postgres:
-    build: ./postgres
+    build: ./.docker/postgres
     restart: always
     environment:
       POSTGRES_DB: giggle
       POSTGRES_USER: giggle
       POSTGRES_PASSWORD: "123456"
+
   nats:
     image: nats-streaming:0.17.0
     restart: always
+
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.6.0
     ports:
       - 9200:9200
     environment:
       - discovery.type=single-node
+
   nginx:
-    build: ./nginx
+    build: ./.docker/nginx
     ports:
       - "8080:80"
     depends_on:

@@ -1,1 +1,1 @@
-module giggle
+module github.com/digkill/giggle
