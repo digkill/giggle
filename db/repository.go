@@ -2,29 +2,31 @@ package db
 
 import (
 	"context"
+
 	"github.com/digkill/giggle/schema"
 )
 
+// Repository interface
 type Repository interface {
 	Close()
 	InsertGiggle(ctx context.Context, giggle schema.Giggle) error
 	ListGiggles(ctx context.Context, skip uint64, take uint64) ([]schema.Giggle, error)
 }
 
-var impl Repository
+var repo Repository
 
 func SetRepository(repository Repository) {
-	impl = repository
+	repo = repository
 }
 
 func Close() {
-	impl.Close()
+	repo.Close()
 }
 
 func InsertGiggle(ctx context.Context, giggle schema.Giggle) error {
-	return impl.InsertGiggle(ctx, giggle)
+	return repo.InsertGiggle(ctx, giggle)
 }
 
 func ListGiggles(ctx context.Context, skip uint64, take uint64) ([]schema.Giggle, error) {
-	return impl.ListGiggles(ctx, skip, take)
+	return repo.ListGiggles(ctx, skip, take)
 }

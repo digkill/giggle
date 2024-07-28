@@ -5,7 +5,9 @@ import (
 	"net/http"
 )
 
-func ResponseOk(w http.ResponseWriter, body interface{}) {
+type Body interface{}
+
+func ResponseOk(w http.ResponseWriter, body Body) {
 	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Content-Type", "application/json")
 

@@ -11,6 +11,7 @@ import (
 
 	"github.com/digkill/giggle/db"
 	"github.com/digkill/giggle/event"
+	"github.com/tinrab/retry"
 )
 
 type Config struct {
